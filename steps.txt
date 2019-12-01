@@ -1,0 +1,63 @@
+1. Create Google Cloud Account
+------------------------------
+
+2. Install GCloud
+-----------------
+	https://cloud.google.com/sdk/install
+	gcloud auth login (in command window to login to cloud)
+	
+3. Intall Kubectl
+-----------------
+	https://kubernetes.io/docs/tasks/tools/install-kubectl/
+	
+	F:\SW\kubectl.exe
+	
+			***********************************************************************************************
+														APPS
+			***********************************************************************************************
+Hello-world-rest-api
+--------------------
+	1. Load the project to STS
+	2. Run and Test it in local
+		http://localhost:8081/hello-world
+		
+	3. MVN clean build (Docker Image also gets created)
+		mvn clean package
+		
+	4. Run the container in local and test
+		docker images (check local images)
+		docker run -p 4000:4000 raja9580/hello-world-rest-api:0.0.1.RELEASE	
+		http://192.168.99.100:4000/hello-world (local host will not work with docker toolbox)
+		
+	5. push the docker image to docker hub
+		docker login  (it will prompt provide username and pwd)
+		docker push raja9580/hello-world-rest-api:0.0.1.RELEASE
+		
+	6. Create Deployment and Expose using kubectl (using powershell)
+	
+		*Get the login string from cloud and use it in powershell
+		
+		kubectl create deployment hello-world-rest-api --image raja9580/hello-world-rest-api:0.0.1.RELEASE	 
+		kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
+		
+		http://35.222.123.108:8080/hello-world-bean  (IP and port will change)
+		
+		Future  deployment of same application
+		kubectl set image deployment hello-world-rest-api hello-world-rest-api=raja9580/hello-world-rest-api:0.0.1.RELEASE	
+		
+	7.get yaml file for deployment and services
+
+		kubectl get deployment hello-world-rest-api -o yaml > deployment.yaml
+		kubectl get service hello-world-rest-api -o yaml > service.yaml
+		
+	8. Change few things like no of pods and app the change
+		kubectl apply -f .\deployment.yaml
+		
+	9.Cleanup Yaml file.Delete app from cluster and deploy app using yaml file
+	
+		kubectl delete all -label app=hello-world-rest-api
+			* -l stands for label
+		kubectl apply -f .\deployment.yaml
+		* now app and service should be up and running :-)
+		
+		
