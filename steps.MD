@@ -12,11 +12,9 @@
 	
 	F:\SW\kubectl.exe
 	
-			***********************************************************************************************
-														APPS
-			***********************************************************************************************
-Hello-world-rest-api
---------------------
+
+4. Hello-world-rest-api
+-----------------------
 	1. Load the project to STS
 	2. Run and Test it in local
 		http://localhost:8081/hello-world
@@ -59,9 +57,10 @@ Hello-world-rest-api
 			* -l stands for label
 		kubectl apply -f .\deployment.yaml
 		* now app and service should be up and running :-)
-			***********************************************************************************************
 			
-Playing with YAML file
+			
+5. Playing with YAML file
+-------------------------
 
 	Reducing Down time with minReadySeconds *TEMP* fix
 	--------------------------------------------------
@@ -91,7 +90,7 @@ Playing with YAML file
 		
 		
 	Running app with just ReplicaSet ,without deployment
-	----------------------------------------------
+	----------------------------------------------------
 	*ReplicaSet  will not care if even if you update the app, it just make sure specified no of pods are always running.
 	*ie why we need deployment,Let us see this in action 
 	
@@ -123,3 +122,6 @@ Playing with YAML file
 		kubectl delete pod hello-world-rest-api-fs7w5
 		*If you delete old pods one by one it will create new pods with updated config
 		 Now check the curl it will have new version
+		 
+	Running app with just ReplicaSet ,without deployment
+	----------------------------------------------------
