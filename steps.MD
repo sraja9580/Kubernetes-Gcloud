@@ -122,6 +122,30 @@
 		kubectl delete pod hello-world-rest-api-fs7w5
 		*If you delete old pods one by one it will create new pods with updated config
 		 Now check the curl it will have new version
-		 
-	Running app with just ReplicaSet ,without deployment
-	----------------------------------------------------
+
+6. 02-todo-web-application-h2 web app with in memory database
+-------------------------------------------------------------
+	1. Load the project to STS
+	
+	2. Run and Test it in local
+		http://localhost:8081
+		raja : test (usr:pwd)
+		
+	3. MVN clean build (Docker Image also gets created)
+		mvn clean package		
+	 
+	4. push the docker image to docker hub
+		docker login  (it will prompt provide username and pwd)
+		docker push raja9580/todo-web-application-h2:0.0.1-SNAPSHOT		
+	
+	5. Copy the doployment.yaml file from previous project modify and deploy
+	
+		*change label and app name
+		* As it is web application all the request from the single use should go to the same instance.
+		   sessionAffinity: ClientIP in service section
+		   
+		kubectl apply -f .\backup\deployment.yaml
+		
+		http://35.222.123.108:8080/login
+		
+	 
